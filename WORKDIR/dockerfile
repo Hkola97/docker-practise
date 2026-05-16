@@ -1,0 +1,7 @@
+ARG version
+FROM almalinux:${version:-9}
+RUN mkdir -p /app
+WORKDIR /app
+RUN pwd
+CMD ["sleep", "100"]
+ 

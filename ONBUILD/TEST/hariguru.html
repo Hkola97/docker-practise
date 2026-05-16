@@ -1,0 +1,387 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 3SEASONS </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #d4af37;
+            --accent: #f5f5f5;
+            --text: #2d2d2d;
+            --light-text: #6b6b6b;
+            --gold-light: #e8d7be;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #f0e6d2 0%, #e8dcc8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .menu-card {
+            background: var(--accent);
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
+                        0 0 1px rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: var(--secondary);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .menu-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            font-weight: 800;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+        }
+
+        .menu-subtitle {
+            font-size: 0.9em;
+            color: var(--gold-light);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--secondary), transparent);
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-items {
+            padding: 40px 30px;
+        }
+
+        .menu-category {
+            margin-bottom: 35px;
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-category:nth-child(1) { animation-delay: 0.2s; }
+        .menu-category:nth-child(2) { animation-delay: 0.4s; }
+        .menu-category:nth-child(3) { animation-delay: 0.6s; }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gold-light);
+            position: relative;
+        }
+
+        .category-title::before {
+            content: '◆';
+            color: var(--secondary);
+            margin-right: 12px;
+        }
+
+        .menu-item {
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0 0 15px 0;
+        }
+
+        .menu-item:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .menu-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover::after {
+            opacity: 1;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            color: var(--primary);
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: color 0.3s ease;
+        }
+
+        .menu-item:hover .item-name {
+            color: var(--secondary);
+        }
+
+        .item-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted var(--gold-light);
+            margin: 0 8px;
+            height: 0.5em;
+            opacity: 0.6;
+        }
+
+        .item-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1em;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover .item-price {
+            transform: scale(1.05);
+        }
+
+        .item-description {
+            font-size: 0.85em;
+            color: var(--light-text);
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .menu-footer {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--gold-light);
+        }
+
+        .footer-text {
+            margin-bottom: 8px;
+        }
+
+        .special-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .menu-header h1 {
+                font-size: 1.8em;
+            }
+
+            .menu-items {
+                padding: 30px 20px;
+            }
+
+            .category-title {
+                font-size: 1.2em;
+            }
+
+            .item-name {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-card">
+            <div class="menu-header">
+                <h1>BELLA VISTA</h1>
+                <div class="divider"></div>
+                <p class="menu-subtitle">Fine Dining Experience</p>
+            </div>
+
+            <div class="menu-items">
+                <!-- Appetizers Section -->
+                <div class="menu-category">
+                    <h2 class="category-title">Appetizers</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Burrata Salad</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$14</span>
+                        </div>
+                        <p class="item-description">Fresh burrata, heirloom tomatoes, basil oil & balsamic reduction</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Foie Gras Terrine</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$18</span>
+                            <span class="special-badge">Chef's Choice</span>
+                        </div>
+                        <p class="item-description">Seared foie gras with brioche toast and fig compote</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Pan-Seared Scallops</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$16</span>
+                        </div>
+                        <p class="item-description">Day-caught scallops with lemon butter and microgreens</p>
+                    </div>
+                </div>
+
+                <!-- Main Courses Section -->
+                <div class="menu-category">
+                    <h2 class="category-title">Main Courses</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Wagyu Ribeye</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$45</span>
+                        </div>
+                        <p class="item-description">Japanese A5 Wagyu, herb butter, roasted root vegetables & demi-glace</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Dover Sole Meunière</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$38</span>
+                        </div>
+                        <p class="item-description">Whole Dover sole, brown butter, capers, lemon & seasonal vegetables</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Duck Confit</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$36</span>
+                        </div>
+                        <p class="item-description">Slow-cooked duck leg, cherry gastrique, potato gratin & haricots verts</p>
+                    </div>
+                </div>
+
+                <!-- Desserts Section -->
+                <div class="menu-category">
+                    <h2 class="category-title">Desserts</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Chocolate Soufflé</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$12</span>
+                        </div>
+                        <p class="item-description">Dark chocolate soufflé with vanilla crème anglaise</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Crème Brûlée</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$10</span>
+                        </div>
+                        <p class="item-description">Classic vanilla crème brûlée with caramelized sugar top</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Seasonal Fruit Tart</span>
+                            <span class="item-dots"></span>
+                            <span class="item-price">$11</span>
+                        </div>
+                        <p class="item-description">Buttery pastry shell with pastry cream and fresh seasonal fruits</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-footer">
+                <p class="footer-text">Reservations Recommended</p>
+                <p class="footer-text">Open Tuesday - Sunday | 5:00 PM - 10:00 PM</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+ARG VERSION=latest
+FROM almalinux:${VERSION:-9}
+ARG USER="HARI" \
+    TOOL="docker"
+RUN echo "Hello :${USER}, welcome to :${TOOL} world!"
+CMD ["SLEEP", "100"] 
